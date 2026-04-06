@@ -9,13 +9,13 @@ build/
 *.egg
 
 # Virtual environment
-.venv/
-venv/
-env/
+# .venv/
+# venv/
+# env/
 
 # YOLO model weights (large binary files - download separately)
-*.pt
-*.onnx
+# *.pt
+# *.onnx
 
 # Output directories
 recordings/
