@@ -9,14 +9,33 @@ A high-performance, real-time motion and AI-powered behavior analysis system bui
 | Category | Features |
 |---|---|
 | 🖥 **Modern UI** | Sleek Dark Mode interface with a **75% / 25% side-by-side layout** maximizing camera real-estate. |
-| 🤖 **AI Action Recognition** | Detects human behaviors like **Standing, Walking, Bending, Waving, Sitting,** and **Falling**. |
+| 🤖 **AI Person & Object Detection** | Identifies people and 80+ object categories (Laptops, Backpacks, Bottles, etc.) in real-time. |
+| 🎭 **Action Recognition** | Advanced human behavior analysis: detects **Standing, Walking, Bending, Waving, Sitting, and Falling**. |
+| 📱 **Smartphone Optimization** | Specifically calibrated for **Smartphone** detection with specialized "Holding" interaction logic. |
 | 🛡 **Safety Alerts** | Automatic red-border visual alarm and log entry for critical actions like **FALL DETECTED**. |
-| 📦 **Smart Object Tracking** | Identifies 80+ objects (Laptops, Backpacks, etc.). **Smartphone** detection specifically optimized. |
-| 🏗 **Interaction Logic** | Detects when a person is **Holding** or **Picking Up** specific objects (e.g., "Holding Smartphone"). |
 | 🎚 **AI Accuracy Slider** | Real-time confidence control (10–99%) with **dynamic color-coded logic hints** for optimal tuning. |
 | ⚡ **CPU Optimization** | Native **720p 16:9** streaming and **Proxy Frame Downscaling** for lag-free motion analysis. |
 | ⏺ **Flexible Recording** | Dedicated **Auto-Record** toggle + **Manual Record** button with high-fidelity 720p output. |
-| 📁 **Recording Browser** | Instant access and playback for saved `.avi` recordings and `.jpg` snapshots. |
+
+---
+
+## 🤖 Detailed AI Capabilities
+
+### 🔍 Supported Actions
+The system uses skeletal keypoint analysis to categorize exactly what a person is doing:
+- **Falling**: Detects sudden horizontal orientation changes (Triggers "FALL DETECTED" alarm).
+- **Sitting**: Analyzes hip-to-knee-to-ankle ratios.
+- **Waving**: Detects hands raised above the shoulder line.
+- **Bending**: Recognizes upper-body angle shifts.
+- **Holding**: Detects when a specific object (like a **Smartphone**) is within a person's hand/wrist radius.
+- **Picking Up**: Combines bending logic with hand-object proximity.
+
+### 📦 Object Recognition
+Leverages the COCO dataset to identify a wide range of objects:
+- **Electronic Devices**: Smartphones, Laptops, TVs, Mice, Keyboards.
+- **Furniture**: Chairs, Tables, Couches, Beds.
+- **Personal Items**: Backpacks, Umbrellas, Handbags, Ties.
+- **Kitchenware**: Cups, Forks, Knives, Spoons, Bottles.
 
 ---
 
@@ -67,8 +86,8 @@ pip install opencv-python pillow numpy ultralytics customtkinter darkdetect
 3. **Hybrid AI Engine**:
    - **YOLOv9**: Handles high-speed object and person detection.
    - **YOLOv8-Pose**: Maps 17 skeletal keypoints for behavior analysis.
-   - **Action Engine**: Computes geometric relationships between bones and objects to identify complex actions like "Holding Smartphone".
-4. **Majority-Vote Smoothing**: Applies a 10-frame rolling buffer to action labels to prevent flickering and ensure display stability.
+   - **Action Engine**: Computes geometric relationships between bones and objects.
+4. **Majority-Vote Smoothing**: Applies a 10-frame rolling buffer to action labels to prevent flickering.
 
 ---
 
