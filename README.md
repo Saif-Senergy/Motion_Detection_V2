@@ -1,23 +1,22 @@
-# 🎯 Ultimate AI Motion Detection System
+# 🎯 Ultimate AI Motion Detection System V3
 
-A real-time motion and AI-powered person detection application built with Python, OpenCV, and YOLOv8. Designed to run entirely on CPU — no GPU required.
+A high-performance, real-time motion and AI-powered behavior analysis system built with Python, OpenCV, and YOLO. Modernized with a premium side-by-side UI and optimized for smooth execution on CPU-only hardware.
 
 ---
 
-## 📸 Features
+## 📸 Core Features
 
-| Feature | Description |
+| Category | Features |
 |---|---|
-| 🎥 Live Preview | Real-time webcam feed displayed in the app window |
-| 🟢 Motion Detection | Background subtraction via OpenCV MOG2 |
-| 🤖 AI Person Detection | YOLOv8n model detects people in each frame |
-| ⏺ Auto Recording | Automatically records video when motion/person is detected |
-| 🖐 Manual Recording | Start/stop recording manually with a button |
-| 📷 Snapshot | Save a still image from the live feed at any time |
-| 🎚 Adjustable Sensitivity | Tune motion area, threshold, and recording duration |
-| 📂 Recording Browser | Browse and open saved recordings from inside the app |
-| 🔴 REC Indicator | On-screen red dot + "REC" label while recording |
-| 📊 Status Bar | Live display of current detection state |
+| 🖥 **Modern UI** | Sleek Dark Mode interface with a **75% / 25% side-by-side layout** maximizing camera real-estate. |
+| 🤖 **AI Action Recognition** | Detects human behaviors like **Standing, Walking, Bending, Waving, Sitting,** and **Falling**. |
+| 🛡 **Safety Alerts** | Automatic red-border visual alarm and log entry for critical actions like **FALL DETECTED**. |
+| 📦 **Smart Object Tracking** | Identifies 80+ objects (Laptops, Backpacks, etc.). **Smartphone** detection specifically optimized. |
+| 🏗 **Interaction Logic** | Detects when a person is **Holding** or **Picking Up** specific objects (e.g., "Holding Smartphone"). |
+| 🎚 **AI Accuracy Slider** | Real-time confidence control (10–99%) with **dynamic color-coded logic hints** for optimal tuning. |
+| ⚡ **CPU Optimization** | Native **720p 16:9** streaming and **Proxy Frame Downscaling** for lag-free motion analysis. |
+| ⏺ **Flexible Recording** | Dedicated **Auto-Record** toggle + **Manual Record** button with high-fidelity 720p output. |
+| 📁 **Recording Browser** | Instant access and playback for saved `.avi` recordings and `.jpg` snapshots. |
 
 ---
 
@@ -25,130 +24,54 @@ A real-time motion and AI-powered person detection application built with Python
 
 - Python **3.9 or newer**
 - A working **webcam**
-- Windows, macOS, or Linux
+- Windows 10/11 (Preferred)
 
 ### Python Libraries
 
-Install all dependencies with a single command:
-
 ```bash
-pip install opencv-python pillow numpy ultralytics
+pip install opencv-python pillow numpy ultralytics customtkinter darkdetect
 ```
 
 ---
 
 ## 🚀 Quick Start
 
-### 1. Clone or download this project
+1. **Clone the Project** and navigate to the directory.
+2. **Install Dependencies**:
+   ```bash
+   pip install opencv-python pillow numpy ultralytics customtkinter darkdetect
+   ```
+3. **Run the App**:
+   ```bash
+   python ultimate_motion_detector_v2.py
+   ```
 
-Place all files in a folder, e.g.:
-
-```
-Project_1/
-└── ultimate_motion_detector_v2.py
-```
-
-### 2. Install dependencies
-
-```bash
-pip install opencv-python pillow numpy ultralytics
-```
-
-### 3. Run the application
-
-```bash
-python ultimate_motion_detector_v2.py
-```
-
-> **Note:** On the very first run, YOLOv8 will automatically download the model weights file `yolov8n.pt` (~6 MB). Internet access is required for this one-time download.
+> **Note:** On the very first run, the system will automatically download the optimized `yolov9t.pt` and `yolov8n-pose.pt` models (approx 12MB total).
 
 ---
 
-## 🗂 Folder Structure
+## 🎛 Pro Control Tuning
 
-```
-Project_1/
-│
-├── ultimate_motion_detector_v2.py   ← Main application
-├── README.md                        ← This file
-│
-├── recordings/                      ← Auto-created; .avi video files saved here
-│   └── 20240101_120000.avi
-│
-└── snapshots/                       ← Auto-created; .jpg snapshot images saved here
-    └── 20240101_120015.jpg
-```
-
----
-
-## 🎛 UI Controls
-
-| Control | Description |
-|---|---|
-| **Min Motion Area** | Minimum contour size (pixels²) to count as motion. Increase to ignore small movements. |
-| **Threshold** | Sensitivity of the background subtractor. Lower = more sensitive. |
-| **Record Seconds** | How many extra seconds to keep recording after motion stops. |
-| **Enable AI Person Detection** | Toggle YOLOv8 person detection on/off. |
-| **📷 Snapshot** | Saves a JPEG image to the `snapshots/` folder. |
-| **⏺ Manual Record** | Starts/stops recording regardless of motion. Button label updates to show state. |
-| **📂 Browse Recordings** | Opens a list of saved recordings with an "Open Folder" shortcut. |
+- **AI Accuracy (%)**: 
+  - 🟢 **25–40%**: The "Sweet Spot". Detects both people and complex objects reliably.
+  - 🟡 **41–65%**: Medium Zone. Filters out background noise; great for busy environments.
+  - 🔴 **66%+**: Strict Mode. Displays only extremely confident human detections.
+- **Auto-Record**: When enabled, the system automatically saves video files to the `/recordings` folder whenever motion or human activity is confirmed.
 
 ---
 
 ## 🔍 How It Works
 
-```
-Webcam Frame
-    │
-    ├─► Background Subtraction (MOG2)
-    │       └─ Contours too small?  →  Ignore
-    │       └─ Large contour found? →  Motion Detected ✅
-    │
-    ├─► YOLOv8 (background thread, if enabled)
-    │       └─ Class 0 (person) found? → Person Detected ✅
-    │
-    └─► Trigger = Motion OR Person OR Manual Record
-            └─ Start/continue recording to recordings/
-            └─ Stop recording after N seconds of silence
-```
-
-The AI detection runs in a **separate background thread** so it never blocks the live preview, keeping the UI smooth even on CPU-only machines.
-
----
-
-## 🎨 Color Legend (On-screen overlays)
-
-| Color | Meaning |
-|---|---|
-| 🟢 Green rectangle | Motion contour detected |
-| 🔵 Blue/Red rectangle | AI-detected person |
-| 🔴 Red dot + "REC" | Currently recording |
-
----
-
-## ⚙️ Troubleshooting
-
-| Problem | Solution |
-|---|---|
-| `Cannot open camera` error | Check webcam is connected and not used by another app |
-| AI detection checkbox greyed out | Run `pip install ultralytics` and restart |
-| YOLOv8 download fails | Check your internet connection on first launch |
-| Video is choppy | Disable AI detection to reduce CPU load |
-| Recordings folder is empty | Make sure motion/person was detected, or use Manual Record |
-
----
-
-## 📦 Dependencies
-
-| Package | Purpose |
-|---|---|
-| `opencv-python` | Camera capture, background subtraction, drawing |
-| `pillow` | Converting OpenCV frames for Tkinter display |
-| `numpy` | Array operations |
-| `ultralytics` | YOLOv8 AI person detection |
+1. **Native Stream**: Captures a wide 1280x720 feed for high visual fidelity.
+2. **Proxy Analysis**: Automatically creates a low-res 640x360 "proxy" frame for background subtraction. This removes CPU lag regardless of how large the actual viewing window is.
+3. **Hybrid AI Engine**:
+   - **YOLOv9**: Handles high-speed object and person detection.
+   - **YOLOv8-Pose**: Maps 17 skeletal keypoints for behavior analysis.
+   - **Action Engine**: Computes geometric relationships between bones and objects to identify complex actions like "Holding Smartphone".
+4. **Majority-Vote Smoothing**: Applies a 10-frame rolling buffer to action labels to prevent flickering and ensure display stability.
 
 ---
 
 ## 📄 License
 
-This project is provided as-is for personal and educational use.
+Modernized version released 2026. Provided for personal, educational, and security research use.
