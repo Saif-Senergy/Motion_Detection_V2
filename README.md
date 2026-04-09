@@ -41,7 +41,7 @@ Leverages the COCO dataset to identify a wide range of objects:
 
 ## 🖥 Requirements
 
-- Python **3.9 or newer**
+- Python **3.12 or newer**
 - A working **webcam**
 - Windows 10/11 (Preferred)
 
