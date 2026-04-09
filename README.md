@@ -1,4 +1,4 @@
-# 🎯 Ultimate AI Motion Detection System V3
+# 🎯 Ultimate AI Motion Detection System V2
 
 A high-performance, real-time motion and AI-powered behavior analysis system built with Python, OpenCV, and YOLO. Modernized with a premium side-by-side UI and optimized for smooth execution on CPU-only hardware.
 
